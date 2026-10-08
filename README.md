@@ -11,5 +11,17 @@ so Batch count, Hires. fix, sampler, size, etc. are all respected (Batch count 4
 - Only the prompt text is replaced; the negative prompt field is left as is
   (`<NegativePrompt:...>` markers are handled by sd-forge-prompt-blacklist).
 
+## Running in the background (Chrome)
+You can switch to other tabs/windows while the queue runs, but Chrome's **Memory Saver** may freeze or
+discard the inactive WebUI tab, which stops the queue. Exempt the WebUI address:
+
+1. Open `chrome://settings/performance`.
+2. Under **Always keep these sites active**, click **Add** and enter the WebUI address, e.g. `127.0.0.1`
+   (or `localhost`, depending on how you open it).
+
+While the queue runs the extension also plays an inaudible tone and falls back to timers for
+`requestAnimationFrame`, so the tab keeps working in the background. If a run still stalls, call
+`promptQueueDump()` in the browser console to get the full timestamped log.
+
 ## Install
 Copy/symlink this folder into `stable-diffusion-webui-forge/extensions/` and restart the WebUI.
